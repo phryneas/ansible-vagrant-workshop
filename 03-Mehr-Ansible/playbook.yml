@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    vhosts:
+      - serverName: kundenprojekt.dev
+        docRoot: /var/www/kundenprojekt
+      - serverName: anderes-kundenprojekt.def
+        docRoot: /var/www/
+  handlers:
+    - name: restart apache
+      service:
+        name: apache2
+        state: restarted
+  tasks:
+    - name: update apt cache
+      apt:
+        update_cache=yes
+        cache_valid_time=3600
+    - name: install software
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - apache2
+        - php7.0
+        - libapache2-mod-php7.0
+    - name: activate mod-php in apache
+      apache2_module:
+        name: php7.0
+        state: present

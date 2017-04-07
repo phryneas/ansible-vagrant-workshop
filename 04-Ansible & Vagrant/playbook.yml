@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    vhosts:
+      - serverName: kundenprojekt.dev
+        docRoot: /var/www/kundenprojekt
+  handlers:
+    - name: restart apache
+      service:
+        name: apache2
+        state: restarted
+  tasks:
+    - name: update apt cache
+      apt:
+        update_cache=yes
+        cache_valid_time=3600
+    - name: install software
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - apache2
+        - php7.0
+        - libapache2-mod-php7.0
+      notify: restart apache
+    - name: activate mod-php in apache
+      apache2_module:
+        name: php7.0
+        state: present
+      notify: restart apache
+    - name: add vhosts
+      template:
+        src: vhost.j2
+        dest: /etc/apache2/sites-available/{{item.serverName}}.conf
+      with_items:
+        "{{vhosts}}"
+      notify: restart apache
+    - name: activate vhost
+      file:
+        src: /etc/apache2/sites-available/{{item.serverName}}.conf
+        dest: /etc/apache2/sites-enabled/{{item.serverName}}.conf
+        state: link
+      with_items:
+        "{{vhosts}}"
+      notify: restart apache
+    - name: remove default vhost
+      file:
+        path: /etc/apache2/sites-enabled/000-default.conf
+        state: absent
+      notify: restart apache
