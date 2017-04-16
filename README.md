@@ -4,9 +4,7 @@
 
 ## Inhaltsverzeichnis ##
 
-This is a conglomerate of different scripts I created over time to full fill specific, more or less automated tasks.
-
-1. [Vagrant Grundlagen: Dateien][01]
+1. [Vagrant Grundlagen][01]
 2. [Ansible Grundlagen][02]
 3. [Ansible Templates][03]
 4. [Ansible & Vagrant kombinieren][04]
