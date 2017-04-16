@@ -24,6 +24,6 @@ This is a conglomerate of different scripts I created over time to full fill spe
 [issues badge]: https://img.shields.io/github/issues/phryneas/ansible-vagrant-workshop.svg
 
 [01]: 01-Vagrantfiles/README.md
-[02]: README.md
-[03]: README.md
-[04]: README.md
+[02]: 02-Ansible-Grundlagen/README.md
+[03]: 03-Mehr-Ansible/README.md
+[04]: 04-Ansible+Vagrant/README.md
