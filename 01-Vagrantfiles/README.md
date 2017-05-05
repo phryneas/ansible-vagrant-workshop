@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-*Anmerkung: in den folgenden Beispiel werden wir erst mal nicht mit `ubuntu/xenial64` -  Ansible benötigt *python 2.7*, und das ist auf der Box nicht standardmäßig installiert.  
+*Anmerkung: in den folgenden Beispiel werden wir erst mal nicht mit `ubuntu/xenial64` arbeiten -  Ansible benötigt *python 2.7*, und das ist auf der Box nicht standardmäßig installiert.  
 Das kann man zwar umgehen, und das werden wir auch später machen - bis dahin verwenden wir aber  `geerlingguy/ubuntu1604`, die das schon mit bringt.* 
 
 # Was bringt uns das?
